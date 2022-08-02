@@ -68,7 +68,7 @@
 
 
 //#define EXCEL
-//#define NTP
+#define NTP
 
 
 #if defined NTP
@@ -76,8 +76,8 @@
   #include <WiFi.h>
   
   NTPtime NTPch("europe.pool.ntp.org"); // Choose your server pool
-  char *ssid      = "Your SSID";        // Set you WiFi SSID
-  char *password  = "Your PASS";        // Set you WiFi password
+  char *ssid      = "KabelBox-B5F4";       // Set you WiFi SSID
+  char *password  = "PBWJ3C588AR2";        // Set you WiFi password
   
   int status = WL_IDLE_STATUS;
   strDateTime dateTime;
@@ -431,6 +431,7 @@ void loop() {
 
   PlotTable(DialData,sizeof(DialData),0x00,1,0);      //2 to back trace
   PlotTable(DialDigits12,sizeof(DialDigits12),0x00,1,0);//2 to back trace 
+  //PlotTable(DialDigitsRoman,sizeof(DialDigitsRoman),0x00,1,0);//2 to back trace 
   PlotTable(HrPtrData, sizeof(HrPtrData), 0xFF,0,9*h);  // 9*h
   PlotTable(MinPtrData,sizeof(MinPtrData),0xFF,0,9*m);  // 9*m
   PlotTable(SecPtrData,sizeof(SecPtrData),0xFF,0,5*s);  // 5*s
