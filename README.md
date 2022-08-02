@@ -6,6 +6,14 @@ Mauro Pintus , Milano 2018/05/25
 
 ![](https://github.com/maurohh/ESP32_OscilloscopeClock/blob/master/ESP32_OscilloscopeClock_01.jpg)
 
+```
+  Small alterations 2022-08-02 P. Sieg:
+  * Made digit 4 a bit bigger (DataTable.h)
+  * User GPIO33 and GPIO32:
+    #define DIGIT_TYPE  32 // 1=Default=Arabian numbers; 0=Roman numbers 
+    #define NO_DIGITS   33 // 1=Default=Show numbers; 0=No numbers, just dots / sec tick marks
+
+
   How to use it:
   
   Load this sketch on a ESP32 board using the Arduino IDE 1.8.7
