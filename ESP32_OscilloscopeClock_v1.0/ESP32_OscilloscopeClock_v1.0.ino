@@ -59,6 +59,12 @@
   
   Thank you!!
 
+  Small alterations 2022-08-02 P. Sieg:
+  * Made digit 4 a bit bigger (DataTable.h)
+  * User GPIO33 and GPIO32:
+    #define DIGIT_TYPE  32 // 1=Default=Arabian numbers; 0=Roman numbers 
+    #define NO_DIGITS   33 // 1=Default=Show numbers; 0=No numbers, just dots / sec tick marks
+
 ******************************************************************************/
 
 #include <driver/dac.h>
@@ -66,6 +72,8 @@
 #include <soc/sens_reg.h>
 #include "DataTable.h"
 
+#define DIGIT_TYPE  32 /* 1=Default=Arabian numbers; 0=Roman numbers */
+#define NO_DIGITS   33 /* 1=Default=Show numbers; 0=No numbers, just dots / sec tick marks */
 
 //#define EXCEL
 #define NTP
@@ -302,6 +310,9 @@ void Line(byte x1, byte y1, byte x2, byte y2)
 
 void setup() 
 {
+  pinMode(DIGIT_TYPE, INPUT_PULLUP); /* 1=Default=Arabian numbers; 0=Roman numbers */
+  pinMode(NO_DIGITS, INPUT_PULLUP); /* 1=Default=Show numbers; 0=No numbers, just dots / sec tick marks */
+  
   Serial.begin(115200);
   Serial.println("\nESP32 Oscilloscope Clock v1.0");
   Serial.println("Mauro Pintus 2018\nwww.mauroh.com");
@@ -417,21 +428,15 @@ void loop() {
     h=0;
   }
 
-  //Optionals
-  //PlotTable(DialDots,sizeof(DialDots),0x00,1,0);
-  //PlotTable(TestData,sizeof(TestData),0x00,0,00); //Full
-  //PlotTable(TestData,sizeof(TestData),0x00,0,11); //Without square
-
-  int i;
-  //Serial.println("Out Ring");                         //2 to back trace
-  //for (i=0; i < 1000; i++) PlotTable(DialData,sizeof(DialData),0x00,2,0);
- 
-  //Serial.println("Diagonals");                        //2 to back trace
-  //for (i=0; i < 2000; i++) PlotTable(DialData,sizeof(DialData),0x00,0,0);
 
   PlotTable(DialData,sizeof(DialData),0x00,1,0);      //2 to back trace
-  PlotTable(DialDigits12,sizeof(DialDigits12),0x00,1,0);//2 to back trace 
-  //PlotTable(DialDigitsRoman,sizeof(DialDigitsRoman),0x00,1,0);//2 to back trace 
+  if (digitalRead(NO_DIGITS)==HIGH) {
+    if (digitalRead(DIGIT_TYPE)==HIGH) {
+      PlotTable(DialDigits12,sizeof(DialDigits12),0x00,1,0);//2 to back trace 
+    } else {    
+      PlotTable(DialDigitsRoman,sizeof(DialDigitsRoman),0x00,1,0);//2 to back trace 
+    }
+  }
   PlotTable(HrPtrData, sizeof(HrPtrData), 0xFF,0,9*h);  // 9*h
   PlotTable(MinPtrData,sizeof(MinPtrData),0xFF,0,9*m);  // 9*m
   PlotTable(SecPtrData,sizeof(SecPtrData),0xFF,0,5*s);  // 5*s
