@@ -4,7 +4,9 @@ ESP32 Oscilloscope Clock using internal DACs, with WiFi ntp sync
 
 Mauro Pintus , Milano 2018/05/25
 
-![](https://github.com/maurohh/ESP32_OscilloscopeClock/blob/master/ESP32_OscilloscopeClock_01.jpg)
+![](https://github.com/petersieg/ESP32_OscilloscopeClock/blob/master/ESP32_OscilloscopeClock_01.jpg)
+
+![](https://github.com/petersieg/ESP32_OscilloscopeClock/blob/master/pcb.jpg)
 
 ```
   Small alterations 2022-08-02 P. Sieg:
