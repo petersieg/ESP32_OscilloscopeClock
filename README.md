@@ -1,4 +1,4 @@
-# ESP32 Oscilloscope Clock by Mauro Pintus (alterations by P. Sieg in 2022)
+# ESP32 Oscilloscope Clock by Mauro Pintus (alterations by P. Sieg)
 
 ESP32 Oscilloscope Clock using internal DACs, with WiFi ntp sync
 
