@@ -85,4 +85,4 @@ Mauro Pintus , Milano 2018/05/25
   
   Thank you!!
 
-![](https://github.com/maurohh/ESP32_OscilloscopeClock/blob/master/ESP32_OscilloscopeClock_Excel.jpg)
+![](https://github.com/petersieg/ESP32_OscilloscopeClock/blob/master/ESP32_OscilloscopeClock_Excel.jpg)
