@@ -1,4 +1,4 @@
-# ESP32 Oscilloscope Clock by Mauro Pintus
+# ESP32 Oscilloscope Clock by Mauro Pintus (alterations by P. Sieg in 2022)
 
 ESP32 Oscilloscope Clock using internal DACs, with WiFi ntp sync
 
@@ -10,11 +10,15 @@ Mauro Pintus , Milano 2018/05/25
 
 ```
   Small alterations 2022-08-02 P. Sieg:
-  * Made digit 4 a bit bigger (DataTable.h)
+  * Made digit arabian 4 a bit bigger (DataTable.h)
   * User GPIO33 and GPIO32:
     #define DIGIT_TYPE  32 // 1=Default=Arabian numbers; 0=Roman numbers 
     #define NO_DIGITS   33 // 1=Default=Show numbers; 0=No numbers, just dots / sec tick marks
-
+    
+  Small alterations 2022-08-05 P. Sieg:
+  * Corrected roman 4 from wrong IIII to correct IV
+  
+```
 
   How to use it:
   
