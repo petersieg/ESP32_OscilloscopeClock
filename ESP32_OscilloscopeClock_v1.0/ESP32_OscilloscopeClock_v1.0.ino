@@ -64,12 +64,13 @@
   * User GPIO33 and GPIO32:
     #define DIGIT_TYPE  32 // 1=Default=Arabian numbers; 0=Roman numbers 
     #define NO_DIGITS   33 // 1=Default=Show numbers; 0=No numbers, just dots / sec tick marks
+  * Corected roman 4. Was wrong IIII. Now correct IV.
 
+  There seems to be an error whem hour is 12 o clock - no hour mark is drawn?
+  
 ******************************************************************************/
 
 #include <driver/dac.h>
-#include <soc/rtc.h>
-#include <soc/sens_reg.h>
 #include "DataTable.h"
 
 #define DIGIT_TYPE  32 /* 1=Default=Arabian numbers; 0=Roman numbers */
@@ -85,7 +86,7 @@
   
   NTPtime NTPch("europe.pool.ntp.org"); // Choose your server pool
   char *ssid      = "KabelBox-B5F4";       // Set you WiFi SSID
-  char *password  = "PBWJ3C588AR2";        // Set you WiFi password
+  char *password  = "";        // Set you WiFi password
   
   int status = WL_IDLE_STATUS;
   strDateTime dateTime;
@@ -314,11 +315,8 @@ void setup()
   pinMode(NO_DIGITS, INPUT_PULLUP); /* 1=Default=Show numbers; 0=No numbers, just dots / sec tick marks */
   
   Serial.begin(115200);
-  Serial.println("\nESP32 Oscilloscope Clock v1.0");
-  Serial.println("Mauro Pintus 2018\nwww.mauroh.com");
-  //rtc_clk_cpu_freq_set(RTC_CPU_FREQ_240M);
-  Serial.println("CPU Clockspeed: ");
-  Serial.println(rtc_clk_cpu_freq_value(rtc_clk_cpu_freq_get()));
+  Serial.println("\nESP32 Oscilloscope Clock v1.1");
+  Serial.println("Mauro Pintus 2018\nwww.mauroh.com + P. Sieg 2022");
   
   dac_output_enable(DAC_CHANNEL_1);
   dac_output_enable(DAC_CHANNEL_2);
@@ -393,7 +391,7 @@ void setup()
   Serial.print(":");
   if (s<10) Serial.print("0");
   Serial.println(s);
-  h=(h*5)+m/12;
+  h=(h*5)+m/12; /* ?? */
 }
 
 // End setup 
@@ -413,18 +411,18 @@ void loop() {
     previousMillis = currentMillis;
     s++;
   }
-  if (s==60) {
+  if (s>=60) {
     s=0;
     m++;
     if ((m==12)||(m==24)||(m==36)||(m==48)) {
       h++;
     }
   }
-  if (m==60) {
+  if (m>=60) {
     m=0;
     h++;
   }
-  if (h==60) {
+  if (h>=12) {
     h=0;
   }
 
