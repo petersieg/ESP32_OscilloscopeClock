@@ -66,7 +66,6 @@
     #define NO_DIGITS   33 // 1=Default=Show numbers; 0=No numbers, just dots / sec tick marks
   * Corected roman 4. Was wrong IIII. Now correct IV (DataTable.h).
 
-  There seems to be an error whem hour is 12 o clock - no hour mark is drawn?
   
 ******************************************************************************/
 
