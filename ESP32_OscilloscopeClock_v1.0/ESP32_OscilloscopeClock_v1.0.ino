@@ -64,7 +64,7 @@
   * User GPIO33 and GPIO32:
     #define DIGIT_TYPE  32 // 1=Default=Arabian numbers; 0=Roman numbers 
     #define NO_DIGITS   33 // 1=Default=Show numbers; 0=No numbers, just dots / sec tick marks
-  * Corected roman 4. Was wrong IIII. Now correct IV.
+  * Corected roman 4. Was wrong IIII. Now correct IV (DataTable.h).
 
   There seems to be an error whem hour is 12 o clock - no hour mark is drawn?
   
@@ -422,7 +422,7 @@ void loop() {
     m=0;
     h++;
   }
-  if (h>=12) {
+  if (h>=60) { /* ?? */
     h=0;
   }
 
