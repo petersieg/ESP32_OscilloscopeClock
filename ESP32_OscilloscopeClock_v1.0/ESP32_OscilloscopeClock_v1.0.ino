@@ -64,8 +64,12 @@
   * User GPIO33 and GPIO32:
     #define DIGIT_TYPE  32 // 1=Default=Arabian numbers; 0=Roman numbers 
     #define NO_DIGITS   33 // 1=Default=Show numbers; 0=No numbers, just dots / sec tick marks
-  * Corected roman 4. Was wrong IIII. Now correct IV (DataTable.h).
 
+  Small alterations 2022-08-05 P. Sieg:
+  * Corrected roman 4 from wrong IIII to correct IV
+
+  Small alterations 2022-08-10 P. Sieg:
+  * MIRROR-X function to mirror x signal (for ex. needed by zo393/pm3230 scopes etc.
   
 ******************************************************************************/
 
@@ -77,7 +81,7 @@
 
 //#define EXCEL
 #define NTP
-
+#define MIRROR-X       /* MIRROR-X function to mirror x signal (for ex. needed by zo393/pm3230 scopes etc. */
 
 #if defined NTP
   #include <NTPtimeESP.h>
@@ -139,6 +143,9 @@ void PlotTable(byte *SubTable, int SubTableSize, int skip, int opt, int offset)
 inline void Dot(int x, int y)
 {
     if (lastx!=x){
+#ifdef MIRROR-X   /* MIRROR-X function to mirror x signal (for ex. needed by zo393/pm3230 scopes etc. */
+      x=255-x;
+#endif
       lastx=x;
       dac_output_voltage(DAC_CHANNEL_1, x);
     }
