@@ -17,7 +17,10 @@ Mauro Pintus , Milano 2018/05/25
     
   Small alterations 2022-08-05 P. Sieg:
   * Corrected roman 4 from wrong IIII to correct IV
-  
+
+  Small alterations 2022-08-10 P. Sieg:
+  * MIRROR-X function to mirror x signal (for ex. needed by zo393/pm3230 scopes etc.
+
 ```
 
   How to use it:
