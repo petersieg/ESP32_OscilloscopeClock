@@ -20,6 +20,9 @@ Mauro Pintus , Milano 2018/05/25
 
   Small alterations 2022-08-10 P. Sieg:
   * MIRROR-X function to mirror x signal (for ex. needed by zo393/pm3230 scopes etc.
+  
+  pcbs - Vorsicht!/Attention!
+  * 2x2 jumpers at GPIO 12+13 and GPIO 32+33 are too close together and have contact - separate them!
 
 ```
 
