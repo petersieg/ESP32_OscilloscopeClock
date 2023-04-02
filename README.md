@@ -23,6 +23,7 @@ Mauro Pintus , Milano 2018/05/25
   
   pcbs - Vorsicht!/Attention!
   * 2x2 jumpers at GPIO 12+13 and GPIO 32+33 are too close together and have contact - separate them!
+  * Corrected pcb in pcb.zip - but untested!
 
 ```
 
