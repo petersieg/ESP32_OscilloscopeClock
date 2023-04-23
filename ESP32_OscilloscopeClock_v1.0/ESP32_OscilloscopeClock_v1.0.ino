@@ -70,10 +70,13 @@
 
   Small alterations 2022-08-10 P. Sieg:
   * MIRROR-X function to mirror x signal (for ex. needed by zo393/pm3230 scopes etc.
+
+  Used FastDac.h for drawing speed up (Flickering with roman dial) 2023-04-23 P. Sieg
   
 ******************************************************************************/
 
 #include <driver/dac.h>
+#include "FastDac.h"
 #include "DataTable.h"
 
 #define DIGIT_TYPE  32 /* 1=Default=Arabian numbers; 0=Roman numbers */
@@ -81,15 +84,15 @@
 
 //#define EXCEL
 #define NTP
-#define MIRROR-X       /* MIRROR-X function to mirror x signal (for ex. needed by zo393/pm3230 scopes etc. */
+//#define MIRROR-X       /* MIRROR-X function to mirror x signal (for ex. needed by zo393/pm3230 scopes etc. */
 
 #if defined NTP
   #include <NTPtimeESP.h>
   #include <WiFi.h>
   
   NTPtime NTPch("europe.pool.ntp.org"); // Choose your server pool
-  char *ssid      = "KabelBox-B5F4";       // Set you WiFi SSID
-  char *password  = "";        // Set you WiFi password
+  char *ssid      = "SSID";       // Set your WiFi SSID
+  char *password  = "PASS";        // Set your WiFi password
   
   int status = WL_IDLE_STATUS;
   strDateTime dateTime;
@@ -116,6 +119,7 @@ const    long interval       = 990; //milliseconds, you should twick this
 
 void PlotTable(byte *SubTable, int SubTableSize, int skip, int opt, int offset)
 {
+  DACPrepare(true);
   int i=offset;
   while (i<SubTableSize){
     if (SubTable[i+2]==skip){
@@ -129,6 +133,7 @@ void PlotTable(byte *SubTable, int SubTableSize, int skip, int opt, int offset)
     i=i+2;
     if (SubTable[i+2]==0xFF) break;
   }
+  DACUnprepare(true);
 }
 
 // End PlotTable 
@@ -147,7 +152,7 @@ inline void Dot(int x, int y)
       x=255-x;
 #endif
       lastx=x;
-      dac_output_voltage(DAC_CHANNEL_1, x);
+      DAC1Write(x);
     }
     #if defined EXCEL
       Serial.print("0x");
@@ -163,8 +168,7 @@ inline void Dot(int x, int y)
     #endif
     if (lasty!=y){
       lasty=y;
-      dac_output_voltage(DAC_CHANNEL_2, y);
-    }
+      DAC2Write(y);   }
     #if defined EXCEL
       Serial.print("0x");
       if (x<=0xF) Serial.print("0");
@@ -326,7 +330,7 @@ void setup()
   
   dac_output_enable(DAC_CHANNEL_1);
   dac_output_enable(DAC_CHANNEL_2);
-
+    
   if (h > 12) h=h-12;
 
   #if defined NTP
