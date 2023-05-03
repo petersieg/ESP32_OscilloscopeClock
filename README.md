@@ -21,6 +21,8 @@ Mauro Pintus , Milano 2018/05/25
   Small alterations 2022-08-10 P. Sieg:
   * MIRROR-X function to mirror x signal (for ex. needed by zo393/pm3230 scopes etc.
   
+  Can use FastDac.h for drawing speed up (Flickering with roman dial) 2023-04-23 P. Sieg
+
 ```
 
   How to use it:
