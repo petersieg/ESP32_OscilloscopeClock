@@ -76,7 +76,12 @@
 ******************************************************************************/
 
 #include <driver/dac.h>
+#include <soc/rtc.h>
+#include <soc/sens_reg.h>
+#define fastdac
+#ifdef fastdac
 #include "FastDac.h"
+#endif
 #include "DataTable.h"
 
 #define DIGIT_TYPE  32 /* 1=Default=Arabian numbers; 0=Roman numbers */
@@ -91,8 +96,8 @@
   #include <WiFi.h>
   
   NTPtime NTPch("europe.pool.ntp.org"); // Choose your server pool
-  char *ssid      = "SSID";       // Set your WiFi SSID
-  char *password  = "PASS";        // Set your WiFi password
+  char *ssid      = "KabelBox-B5F4";       // Set your WiFi SSID
+  char *password  = "PBWJ3C588AR2";        // Set your WiFi password
   
   int status = WL_IDLE_STATUS;
   strDateTime dateTime;
@@ -119,7 +124,9 @@ const    long interval       = 990; //milliseconds, you should twick this
 
 void PlotTable(byte *SubTable, int SubTableSize, int skip, int opt, int offset)
 {
+#ifdef fastdac
   DACPrepare(true);
+#endif
   int i=offset;
   while (i<SubTableSize){
     if (SubTable[i+2]==skip){
@@ -133,7 +140,9 @@ void PlotTable(byte *SubTable, int SubTableSize, int skip, int opt, int offset)
     i=i+2;
     if (SubTable[i+2]==0xFF) break;
   }
+#ifdef fastdac
   DACUnprepare(true);
+#endif
 }
 
 // End PlotTable 
@@ -152,8 +161,12 @@ inline void Dot(int x, int y)
       x=255-x;
 #endif
       lastx=x;
+#ifdef fastdac
       DAC1Write(x);
-    }
+#else
+      dac_output_voltage(DAC_CHANNEL_1, x);
+#endif
+    }  
     #if defined EXCEL
       Serial.print("0x");
       if (x<=0xF) Serial.print("0");
@@ -168,7 +181,12 @@ inline void Dot(int x, int y)
     #endif
     if (lasty!=y){
       lasty=y;
-      DAC2Write(y);   }
+#ifdef fastdac
+      DAC2Write(y);
+#else
+      dac_output_voltage(DAC_CHANNEL_2, y);
+#endif
+    }  
     #if defined EXCEL
       Serial.print("0x");
       if (x<=0xF) Serial.print("0");
