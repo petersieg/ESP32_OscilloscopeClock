@@ -24,6 +24,12 @@ Mauro Pintus , Milano 2018/05/25
   Can use FastDac.h for drawing speed up (Flickering with roman dial) 2023-04-23 P. Sieg
 
 ```
+pcb files:
+
+pcb.zip - strait version - now with jumpers at GPIO 32+33
+
+pcb_potis.zip - version with potentiometers to adjust x+y - now with jumpers at GPIO 32+33
+
 
   How to use it:
   
