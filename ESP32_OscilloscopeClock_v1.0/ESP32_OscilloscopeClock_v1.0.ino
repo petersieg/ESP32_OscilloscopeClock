@@ -96,8 +96,8 @@
   #include <WiFi.h>
   
   NTPtime NTPch("europe.pool.ntp.org"); // Choose your server pool
-  char *ssid      = "KabelBox-B5F4";       // Set your WiFi SSID
-  char *password  = "PBWJ3C588AR2";        // Set your WiFi password
+  char *ssid      = "xxxxxxxxx";       // Set your WiFi SSID
+  char *password  = "yyyyyyyyy";        // Set your WiFi password
   
   int status = WL_IDLE_STATUS;
   strDateTime dateTime;
